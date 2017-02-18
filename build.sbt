@@ -74,6 +74,9 @@ libraryDependencies ++= Seq(
 // logging
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
 
+// option parser
+libraryDependencies += "com.github.scopt" %% "scopt" % "3.3.0"
+
 // testing
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
