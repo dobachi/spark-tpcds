@@ -16,5 +16,10 @@ This project is derived from the following projects.
 - ScalaTest 2.2.4
 - ScalaCheck 1.12.2
 
+## ToDo
+
+- Add a method to create Hive tables.
+- Add a class to execute TPC-DS queries.
+
 ## Author
 - dobashim (dobashim@oss.nttdata.co.jp)
