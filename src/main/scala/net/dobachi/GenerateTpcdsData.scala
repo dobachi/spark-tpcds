@@ -26,7 +26,7 @@ import org.apache.spark.sql.SparkSession
   */
 object GenerateTpcdsData {
 
-  val log = LogManager.getRootLogger
+  val log = LogManager.getLogger(this.getClass)
 
   // Scopt configuration
   case class Config(partitionNum: Int = 10,
@@ -62,8 +62,14 @@ object GenerateTpcdsData {
     parser.parse(args, Config()) match {
       case Some(config) =>
         implicit val spark = SparkSession.builder().appName(config.appName).getOrCreate()
-        val tpcdsData = new TpcdsData(config.partitionNum, config.toolDir, config.scaleFactor, config.outputDir)
+
+        log.info("defining DataFrames")
+        val tpcdsData = new TpcdsData(config.partitionNum, config.toolDir, config.scaleFactor,
+          config.outputDir, config.enableOverwrite)
+
+        log.info("saving DataFrames")
         tpcdsData.save()
+
       case None =>
         sys.exit(1)
     }
