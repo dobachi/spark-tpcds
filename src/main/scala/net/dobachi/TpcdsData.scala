@@ -14,7 +14,7 @@ import scala.sys.process._
 /**
   * Created by dobachi on 2017/02/18.
   */
-class TpcdsData(partitionNum: Int, toolDir: String, scaleFactor: Int, outputDir: String,
+class TpcdsData(partitionNum: Int, toolDir: String, scaleFactor: Int, outputDir: String, databaseName: String,
                 enableOverwrite: Boolean = false)(implicit spark: SparkSession)
 extends Serializable {
 
@@ -58,7 +58,7 @@ extends Serializable {
     (table, withSchemaDF)
   }
 
-  def save() = {
+  def saveAsParquetFiles() = {
     if (enableOverwrite) {
       dsdgenDFs.foreach { case (table, df) =>
         val outputURL = outputDir + "/" + table.name
@@ -68,6 +68,20 @@ extends Serializable {
       dsdgenDFs.foreach { case (table, df) =>
         val outputURL = outputDir + "/" + table.name
         df.write.format("parquet").save(outputURL)
+      }
+    }
+  }
+
+  def createTable() = {
+    spark.sqlContext.sql(s"CREATE DATABASE IF NOT EXISTS $databaseName")
+    spark.sqlContext.sql(s"USE $databaseName")
+    if (enableOverwrite) {
+      dsdgenDFs.foreach { case (table, df) =>
+        df.write.format("parquet").mode("overwrite").saveAsTable(table.name)
+      }
+    } else {
+      dsdgenDFs.foreach { case (table, df) =>
+        df.write.format("parquet").saveAsTable(table.name)
       }
     }
   }

@@ -1,7 +1,8 @@
 import net.dobachi.TpcdsData
 
 /**
-  * Created by dobachi on 2017/02/18.
+  * Scala Shell to create tables of TPC-DS data.
+  * You can also use an application instead of this script.
   */
 
 val partitionNum = 1
@@ -10,4 +11,4 @@ val scaleFactor = 1
 val outputDir = "/tmp/tpcds"
 implicit def sparkSession = spark
 val tpcdsData = new TpcdsData(partitionNum, toolDir, scaleFactor, outputDir)
-tpcdsData.save()
+tpcdsData.createTable()

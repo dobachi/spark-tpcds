@@ -34,6 +34,7 @@ object GenerateTpcdsData {
                     scaleFactor: Int = 1,
                     outputDir: String = "/tmp/tpcds",
                     appName: String = "GenerateTpcdsData",
+                    databaseName: String = "tpcds",
                     enableOverwrite: Boolean = false)
 
   def main(args: Array[String]): Unit = {
@@ -41,7 +42,8 @@ object GenerateTpcdsData {
       head("GenerateTpcdsData")
 
       arg[String]("outputDir").action((x, c) =>
-        c.copy(outputDir = x)).text("The URL of output files")
+        c.copy(outputDir = x)).text("The URL of output files. If you write data into Hive database, " +
+        "this parameter is ignored and data is written into warehouse directory which you configured in hive-site.xml.")
 
       opt[Int]("partitionNum").action((x, c) =>
         c.copy(partitionNum = x)).text("The number of partitions, which is also used to configure the parallelism. default: 10")
@@ -55,20 +57,25 @@ object GenerateTpcdsData {
       opt[String]("appName").action((x, c) =>
         c.copy(appName = x)).text("The name of application which is used for YARN")
 
+      opt[String]("databaseName").action((x, c) =>
+        c.copy(databaseName = x)).text("The name of database when you create Hive table")
+
       opt[Unit]("enableOverwrite").action((_, c) =>
         c.copy(enableOverwrite = true)).text("Enable overwrite mode")
     }
 
     parser.parse(args, Config()) match {
       case Some(config) =>
-        implicit val spark = SparkSession.builder().appName(config.appName).getOrCreate()
+        implicit val spark = SparkSession.builder().appName(config.appName).enableHiveSupport().getOrCreate()
 
-        log.info("defining DataFrames")
+        log.info("Defining DataFrames")
         val tpcdsData = new TpcdsData(config.partitionNum, config.toolDir, config.scaleFactor,
-          config.outputDir, config.enableOverwrite)
+          config.outputDir, config.databaseName, config.enableOverwrite)
 
-        log.info("saving DataFrames")
-        tpcdsData.save()
+        // If you want to create raw Parquet file instead of Hive table,
+        // you can use saveAsParquetFiles method instead of createTable method.
+        log.info("Creating tables")
+        tpcdsData.createTable()
 
       case None =>
         sys.exit(1)
