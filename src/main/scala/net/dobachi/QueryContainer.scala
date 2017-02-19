@@ -50,6 +50,13 @@ class QueryContainer(benchmark: String, database: String)(implicit spark: SparkS
     }
   }
 
+  def executeAllQueries() = {
+    spark.sql(s"USE ${database}")
+    allQueries.foreach{ q =>
+      q.executeQuery()
+    }
+  }
+
   def executeQueries(queries: Array[Query]) = {
     spark.sql(s"USE ${database}")
     queries.foreach{ q =>
