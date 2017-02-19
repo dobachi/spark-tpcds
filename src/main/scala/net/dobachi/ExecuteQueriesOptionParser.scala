@@ -7,15 +7,19 @@ object ExecuteQueriesOptionParser {
   def apply() = {
     new scopt.OptionParser[ExecuteQueriesConfig]("tpcds") {
       arg[String]("benchmark").action((x, c) =>
-        c.copy(x)
+        c.copy(benchmark = x)
       ).text("The type of benchmark. default: impala-tpcds-queries")
 
       opt[String]("queryFilter").action((x, c) =>
-        c.copy(x)
+        c.copy(queryFilter = x)
       ).text("The filter to chose queries which you execute. Specify queries with comma. e.g. query01.sql,query02.sql")
 
-      opt[String]('a', "applicationName").action((x, c) =>
-        c.copy(x)
+      opt[String]("database").action((x, c) =>
+        c.copy(database = x)
+      ).text("The name of database. default: tpcds")
+
+      opt[String]("appName").action((x, c) =>
+        c.copy(appName = x)
       ).text("YARN application name")
     }
   }

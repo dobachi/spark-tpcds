@@ -18,8 +18,6 @@
 
 package net.dobachi
 
-import java.nio.file.{FileSystems, Files, Path, Paths}
-
 import org.apache.spark.sql.SparkSession
 
 
@@ -34,10 +32,10 @@ object ExecuteQueries {
     parser.parse(args, ExecuteQueriesConfig()) match {
       case Some(config) =>
         implicit val spark = SparkSession.builder().enableHiveSupport().appName(config.appName).getOrCreate()
-        val queries = new QueryContainer(config.benchmark)
-        // val filtered = queries.filterQueryByFileName("query10.sql,query01.sql")
-        val filterString = "query11.sql,query13.sql"
-        queries.executeFilteredQueries(filterString)
+        println(config.benchmark)
+        println(config.database)
+        val queries = new QueryContainer(config.benchmark, config.database)
+        queries.executeFilteredQueries(config.queryFilter)
       case None =>
         sys.exit(1)
     }

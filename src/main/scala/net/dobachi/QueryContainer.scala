@@ -9,7 +9,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by dobachi on 2017/02/19.
   */
-class QueryContainer(benchmark: String)(implicit spark: SparkSession) extends Serializable {
+class QueryContainer(benchmark: String, database: String)(implicit spark: SparkSession) extends Serializable {
   val basePath = "/queries"
   val benchPath = basePath + "/" + benchmark
 
@@ -51,6 +51,7 @@ class QueryContainer(benchmark: String)(implicit spark: SparkSession) extends Se
   }
 
   def executeQueries(queries: Array[Query]) = {
+    spark.sql(s"USE ${database}")
     queries.foreach{ q =>
       q.executeQuery()
     }
