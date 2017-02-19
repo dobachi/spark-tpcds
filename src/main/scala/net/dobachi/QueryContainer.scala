@@ -2,12 +2,14 @@ package net.dobachi
 
 import java.nio.file.{FileSystems, Files, Path, Paths}
 
+import org.apache.spark.sql.SparkSession
+
 import scala.collection.JavaConverters._
 
 /**
   * Created by dobachi on 2017/02/19.
   */
-class QueryContainer(benchmark: String) extends Serializable {
+class QueryContainer(benchmark: String)(implicit spark: SparkSession) extends Serializable {
   val basePath = "/queries"
   val benchPath = basePath + "/" + benchmark
 
@@ -25,7 +27,7 @@ class QueryContainer(benchmark: String) extends Serializable {
     walk.sorted().toArray().tail.map(o => o.asInstanceOf[Path])
   }
 
-  val queries: Array[Query] = {
+  val allQueries: Array[Query] = {
     paths.map(p => new Query(p))
   }
 
@@ -37,15 +39,25 @@ class QueryContainer(benchmark: String) extends Serializable {
     paths.map(p => p.toString)
   }
 
-  def findQueryByFileName(targetFileName: String): Query = {
-    val filtered = queries.filter(q => q.path.getFileName.toString == targetFileName)
+  def filterQueryByFileName(filterString: String): Array[Query] = {
+    val chosen = filterString.split(",").map(_.trim)
+    val filtered = allQueries.filter(q => chosen.contains(q.path.getFileName.toString))
 
     filtered match {
       case arr if arr.isEmpty =>
         throw new RuntimeException("None of files matched")
-      case arr if arr.length > 1 =>
-        throw new RuntimeException("Multiple files matched")
-      case arr => arr(0)
+      case arr => arr
     }
+  }
+
+  def executeQueries(queries: Array[Query]) = {
+    queries.foreach{ q =>
+      q.executeQuery()
+    }
+  }
+
+  def executeFilteredQueries(filterString: String) = {
+    val queries = filterQueryByFileName(filterString)
+    executeQueries(queries)
   }
 }
