@@ -38,7 +38,7 @@ object ExecuteQueries {
         println(config.database)
         val queries = new QueryContainer(config.benchmark, config.database)
         // val processTime = queries.executeFilteredQueries(config.queryFilter)
-        val processTime = queries.executeAllQueries()
+        val processTime = queries.executeFilteredQueries(config.queryFilter, config.excludedQueries)
         processTime.foreach(p => log.info(s"${p.query.path}: ${p.pTime} msec"))
       case None =>
         sys.exit(1)

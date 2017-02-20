@@ -14,6 +14,10 @@ object ExecuteQueriesOptionParser {
         c.copy(queryFilter = x)
       ).text("The filter to chose queries which you execute. Specify queries with comma. e.g. query01.sql,query02.sql")
 
+      opt[String]("excludedQueries").action((x, c) =>
+        c.copy(excludedQueries = x)
+      ).text("The list of queries which are excluded from execution. e.g. query01,sql,query02.sql")
+
       opt[String]("database").action((x, c) =>
         c.copy(database = x)
       ).text("The name of database. default: tpcds")

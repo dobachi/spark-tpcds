@@ -42,11 +42,22 @@ class QueryContainer(benchmark: String, database: String)(implicit spark: SparkS
     paths.map(p => p.toString)
   }
 
-  def filterQueryByFileName(filterString: String): Array[Query] = {
+  def filterQueryByFileName(filterString: String, queries: Array[Query]): Array[Query] = {
     val chosen = filterString.split(",").map(_.trim)
-    val filtered = allQueries.filter(q => chosen.contains(q.path.getFileName.toString))
+    val filtered = queries.filter(q => chosen.contains(q.path.getFileName.toString))
 
     filtered match {
+      case arr if arr.isEmpty =>
+        throw new RuntimeException("None of files matched")
+      case arr => arr
+    }
+  }
+
+  def excludeQueryByFileName(filterString: String, queries: Array[Query]): Array[Query] = {
+    val chosen = filterString.split(",").map(_.trim)
+    val excluded = queries.filter(q => ! chosen.contains(q.path.getFileName.toString))
+
+    excluded match {
       case arr if arr.isEmpty =>
         throw new RuntimeException("None of files matched")
       case arr => arr
@@ -75,8 +86,13 @@ class QueryContainer(benchmark: String, database: String)(implicit spark: SparkS
     }
   }
 
-  def executeFilteredQueries(filterString: String) = {
-    val queries = filterQueryByFileName(filterString)
+  def executeFilteredQueries(filterString: String, excludeString: String) = {
+    val queries = if(filterString == "") {
+      excludeQueryByFileName(excludeString, allQueries)
+    } else {
+      val filtered = filterQueryByFileName(filterString, allQueries)
+      excludeQueryByFileName(excludeString, filtered)
+    }
     executeQueries(queries)
   }
 }

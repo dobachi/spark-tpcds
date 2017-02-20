@@ -5,5 +5,6 @@ package net.dobachi
   */
 case class ExecuteQueriesConfig(benchmark: String = "tpcds",
                                 queryFilter: String = "",
+                                excludedQueries: String = "",
                                 database: String = "tpcds",
                                 appName: String = "tpcds")
