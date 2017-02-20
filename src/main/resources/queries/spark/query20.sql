@@ -25,6 +25,6 @@ select  i_item_id
          ,i_item_id
          ,i_item_desc
          ,revenueratio
- fetch first 100 rows only;
+ limit 100;
 
 

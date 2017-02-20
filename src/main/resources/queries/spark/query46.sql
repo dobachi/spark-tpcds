@@ -30,6 +30,6 @@ select  c_last_name
           ,ca_city
           ,bought_city
           ,ss_ticket_number
-   fetch first 100 rows only;
+   limit 100;
 
 

@@ -24,6 +24,6 @@ where case when avg_monthly_sales > 0 then abs (sum_sales - avg_monthly_sales) /
 order by i_manager_id
         ,avg_monthly_sales
         ,sum_sales
- fetch first 100 rows only;
+ limit 100;
 
 

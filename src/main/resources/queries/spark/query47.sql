@@ -46,6 +46,6 @@ with v1 as(
         avg_monthly_sales > 0 and
         case when avg_monthly_sales > 0 then abs(sum_sales - avg_monthly_sales) / avg_monthly_sales else null end > 0.1
  order by sum_sales - avg_monthly_sales, 3
-  fetch first 100 rows only;
+  limit 100;
 
 

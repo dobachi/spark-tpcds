@@ -122,6 +122,6 @@ select
  store.currency_rank <= 10
  )
  order by 1,4,5
-  fetch first 100 rows only;
+  limit 100;
 
 

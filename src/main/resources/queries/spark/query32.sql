@@ -23,6 +23,6 @@ and cs_ext_discount_amt
                              (cast('1998-03-18' as date) + 90 days)
           and d_date_sk = cs_sold_date_sk 
       ) 
- fetch first 100 rows only;
+ limit 100;
 
 

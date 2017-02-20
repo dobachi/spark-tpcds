@@ -16,6 +16,6 @@ select  dt.d_year
  order by dt.d_year
          ,sum_agg desc
          ,brand_id
-  fetch first 100 rows only;
+  limit 100;
 
 

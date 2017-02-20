@@ -42,6 +42,6 @@ select
           cd_education_status,
           cd_purchase_estimate,
           cd_credit_rating
-  fetch first 100 rows only;
+  limit 100;
 
 

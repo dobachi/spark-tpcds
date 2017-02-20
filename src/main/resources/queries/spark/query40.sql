@@ -23,6 +23,6 @@ select
  group by
     w_state,i_item_id
  order by w_state,i_item_id
- fetch first 100 rows only;
+ limit 100;
 
 

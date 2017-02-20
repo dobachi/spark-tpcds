@@ -24,6 +24,6 @@ where d1.d_week_seq = d2.d_week_seq
   and cd_marital_status = 'M'
 group by i_item_desc,w_warehouse_name,d1.d_week_seq
 order by total_cnt desc, i_item_desc, w_warehouse_name, d_week_seq
- fetch first 100 rows only;
+ limit 100;
 
 

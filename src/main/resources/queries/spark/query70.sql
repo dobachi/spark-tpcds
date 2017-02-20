@@ -33,6 +33,6 @@ select
    lochierarchy desc
   ,case when lochierarchy = 0 then s_state end
   ,rank_within_parent
-  fetch first 100 rows only;
+  limit 100;
 
 

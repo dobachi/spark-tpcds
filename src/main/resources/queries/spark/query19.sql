@@ -20,6 +20,6 @@ select  i_brand_id brand_id, i_brand brand, i_manufact_id, i_manufact,
          ,i_brand_id
          ,i_manufact_id
          ,i_manufact
- fetch first 100 rows only ;
+ limit 100 ;
 
 

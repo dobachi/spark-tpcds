@@ -15,6 +15,6 @@ select  ca_zip, ca_county, sum(ws_sales_price)
  	and d_qoy = 2 and d_year = 2000
  group by ca_zip, ca_county
  order by ca_zip, ca_county
-  fetch first 100 rows only;
+  limit 100;
 
 

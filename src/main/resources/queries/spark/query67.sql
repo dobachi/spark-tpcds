@@ -39,6 +39,6 @@ order by i_category
         ,s_store_id
         ,sumsales
         ,rk
- fetch first 100 rows only;
+ limit 100;
 
 

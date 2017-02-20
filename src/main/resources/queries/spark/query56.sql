@@ -63,6 +63,6 @@ where i_color in ('orchid','chiffon','lace'))
         select * from ws) tmp1
  group by i_item_id
  order by total_sales
-  fetch first 100 rows only;
+  limit 100;
 
 

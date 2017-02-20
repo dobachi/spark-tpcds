@@ -25,6 +25,6 @@ and ws_ext_discount_amt
           and d_date_sk = ws_sold_date_sk 
       ) 
 order by sum(ws_ext_discount_amt)
- fetch first 100 rows only;
+ limit 100;
 
 

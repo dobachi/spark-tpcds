@@ -73,6 +73,6 @@ where i_category in ('Children'))
  group by i_item_id
  order by i_item_id
       ,total_sales
-  fetch first 100 rows only;
+  limit 100;
 
 

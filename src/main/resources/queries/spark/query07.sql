@@ -16,6 +16,6 @@ select  i_item_id,
        d_year = 1998 
  group by i_item_id
  order by i_item_id
-  fetch first 100 rows only;
+  limit 100;
 
 

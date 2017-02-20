@@ -42,6 +42,6 @@ select
    ,i_item_desc
    ,s_store_id
    ,s_store_name
-  fetch first 100 rows only;
+  limit 100;
 
 

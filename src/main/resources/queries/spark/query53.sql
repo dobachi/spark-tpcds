@@ -23,6 +23,6 @@ where case when avg_quarterly_sales > 0
 order by avg_quarterly_sales,
 	 sum_sales,
 	 i_manufact_id
- fetch first 100 rows only;
+ limit 100;
 
 

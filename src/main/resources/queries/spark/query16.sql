@@ -26,6 +26,6 @@ and not exists(select *
                from catalog_returns cr1
                where cs1.cs_order_number = cr1.cr_order_number)
 order by count(distinct cs_order_number)
- fetch first 100 rows only;
+ limit 100;
 
 

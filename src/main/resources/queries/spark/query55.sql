@@ -9,6 +9,6 @@ select  i_brand_id brand_id, i_brand brand,
  	and d_year=2001
  group by i_brand, i_brand_id
  order by ext_price desc, i_brand_id
- fetch first 100 rows only ;
+ limit 100 ;
 
 

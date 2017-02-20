@@ -53,6 +53,6 @@ select
           cd_dep_count,
           cd_dep_employed_count,
           cd_dep_college_count
-  fetch first 100 rows only;
+  limit 100;
 
 

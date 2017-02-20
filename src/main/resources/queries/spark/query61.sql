@@ -39,6 +39,6 @@ from
    and   d_year = 1999
    and   d_moy  = 11) all_sales
 order by promotions, total
- fetch first 100 rows only;
+ limit 100;
 
 

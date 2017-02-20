@@ -21,6 +21,6 @@ select  a.ca_state state, count(*) cnt
  group by a.ca_state
  having count(*) >= 10
  order by cnt 
-  fetch first 100 rows only;
+  limit 100;
 
 

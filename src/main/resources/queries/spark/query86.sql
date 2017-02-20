@@ -21,6 +21,6 @@ select
    lochierarchy desc,
    case when lochierarchy = 0 then i_category end,
    rank_within_parent
-  fetch first 100 rows only;
+  limit 100;
 
 

@@ -215,6 +215,6 @@ select
  	,ship_carriers
        ,year
  order by w_warehouse_name
-  fetch first 100 rows only;
+  limit 100;
 
 

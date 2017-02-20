@@ -51,6 +51,6 @@ with my_customers as (
  from segments
  group by segment
  order by segment, num_customers
-  fetch first 100 rows only;
+  limit 100;
 
 

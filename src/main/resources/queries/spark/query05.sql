@@ -123,6 +123,6 @@ with ssr as
  group by rollup (channel, id)
  order by channel
          ,id
-  fetch first 100 rows only;
+  limit 100;
 
 

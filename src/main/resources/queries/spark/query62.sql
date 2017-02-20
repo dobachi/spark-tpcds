@@ -30,6 +30,6 @@ group by
 order by substr(w_warehouse_name,1,20)
         ,sm_type
        ,web_name
- fetch first 100 rows only;
+ limit 100;
 
 

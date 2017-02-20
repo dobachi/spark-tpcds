@@ -25,6 +25,6 @@ select  *
              end) between 2.0/3.0 and 3.0/2.0
  order by w_warehouse_name
          ,i_item_id
-  fetch first 100 rows only;
+  limit 100;
 
 

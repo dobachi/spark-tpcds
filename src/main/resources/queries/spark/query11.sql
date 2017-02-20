@@ -76,6 +76,6 @@ with year_total as (
          ,t_s_secyear.customer_first_name
          ,t_s_secyear.customer_last_name
          ,t_s_secyear.customer_email_address
- fetch first 100 rows only;
+ limit 100;
 
 
