@@ -2,6 +2,7 @@ package net.dobachi
 
 import java.nio.file.{FileSystems, Files, Path, Paths}
 
+import org.apache.log4j.LogManager
 import org.apache.spark.sql.SparkSession
 
 import scala.collection.JavaConverters._
@@ -10,6 +11,8 @@ import scala.collection.JavaConverters._
   * Created by dobachi on 2017/02/19.
   */
 class QueryContainer(benchmark: String, database: String)(implicit spark: SparkSession) extends Serializable {
+  val log = LogManager.getLogger(this.getClass)
+
   val basePath = "/queries"
   val benchPath = basePath + "/" + benchmark
 
@@ -50,17 +53,25 @@ class QueryContainer(benchmark: String, database: String)(implicit spark: SparkS
     }
   }
 
-  def executeAllQueries() = {
+  def executeAllQueries(): Array[ProcessTime] = {
     spark.sql(s"USE ${database}")
-    allQueries.foreach{ q =>
-      q.executeQuery()
+    log.info(s"USE ${database}")
+
+    allQueries.map{ q =>
+      log.info(s"Execute ${q.path}")
+      val pTime = q.executeQuery()
+      ProcessTime(q, pTime)
     }
   }
 
-  def executeQueries(queries: Array[Query]) = {
+  def executeQueries(queries: Array[Query]): Array[ProcessTime] = {
     spark.sql(s"USE ${database}")
-    queries.foreach{ q =>
-      q.executeQuery()
+    log.info(s"USE ${database}")
+
+    queries.map{ q =>
+      log.info(s"Execute ${q.path}")
+      val pTime = q.executeQuery()
+      ProcessTime(q, pTime)
     }
   }
 

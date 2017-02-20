@@ -17,9 +17,18 @@ class Query(val path: Path)(implicit spark: SparkSession) extends Serializable {
     queryString.split(";").dropRight(1)
   }
 
-  def executeQuery() = {
-    contents.foreach{ q =>
-      spark.sql(q)
+  def processTime(f: => Any): Long = {
+    val start = System.currentTimeMillis()
+    f
+    val end = System.currentTimeMillis()
+    end - start
+  }
+
+  def executeQuery(): Long = {
+    processTime{
+      contents.foreach{ q =>
+        spark.sql(q)
+      }
     }
   }
 }

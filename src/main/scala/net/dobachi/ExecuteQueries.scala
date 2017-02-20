@@ -18,6 +18,7 @@
 
 package net.dobachi
 
+import org.apache.log4j.LogManager
 import org.apache.spark.sql.SparkSession
 
 
@@ -25,6 +26,7 @@ import org.apache.spark.sql.SparkSession
   * An exmaple of Spark application
   */
 object ExecuteQueries {
+  val log = LogManager.getLogger(this.getClass)
 
   def main(args: Array[String]): Unit = {
     val parser = ExecuteQueriesOptionParser()
@@ -35,7 +37,9 @@ object ExecuteQueries {
         println(config.benchmark)
         println(config.database)
         val queries = new QueryContainer(config.benchmark, config.database)
-        queries.executeFilteredQueries(config.queryFilter)
+        // val processTime = queries.executeFilteredQueries(config.queryFilter)
+        val processTime = queries.executeAllQueries()
+        processTime.foreach(p => log.info(s"${p.query.path}: ${p.pTime} msec"))
       case None =>
         sys.exit(1)
     }
