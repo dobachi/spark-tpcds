@@ -15,6 +15,6 @@ select  i_product_name
                        ,i_class
                        ,i_category)
 order by qoh, i_product_name, i_brand, i_class, i_category
- limit 100;
+limit 100;
 
 

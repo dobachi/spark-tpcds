@@ -111,6 +111,6 @@ union all
          ,t_s_secyear.customer_first_name
          ,t_s_secyear.customer_last_name
          ,t_s_secyear.customer_email_address
- limit 100;
+limit 100;
 
 

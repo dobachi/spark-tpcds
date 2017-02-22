@@ -122,6 +122,6 @@ select
  store.currency_rank <= 10
  )
  order by 1,4,5
-  limit 100;
+ limit 100;
 
 

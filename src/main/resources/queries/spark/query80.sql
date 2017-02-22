@@ -91,6 +91,6 @@ group by web_site_id)
  group by rollup (channel, id)
  order by channel
          ,id
-  limit 100;
+ limit 100;
 
 

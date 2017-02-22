@@ -47,6 +47,6 @@ select  distinct(i_product_name)
         (i_size = 'petite' or i_size = 'medium')
         )))) > 0
  order by i_product_name
-  limit 100;
+ limit 100;
 
 

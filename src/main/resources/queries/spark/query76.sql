@@ -19,6 +19,6 @@ select  channel, col_name, d_year, d_qoy, i_category, COUNT(*) sales_cnt, SUM(ex
            AND cs_item_sk=i_item_sk) foo
 GROUP BY channel, col_name, d_year, d_qoy, i_category
 ORDER BY channel, col_name, d_year, d_qoy, i_category
- limit 100;
+limit 100;
 
 

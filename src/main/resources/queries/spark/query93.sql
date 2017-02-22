@@ -13,6 +13,6 @@ select  ss_customer_sk
               and r_reason_desc = 'Did not like the warranty') t
       group by ss_customer_sk
       order by sumsales, ss_customer_sk
- limit 100;
+limit 100;
 
 

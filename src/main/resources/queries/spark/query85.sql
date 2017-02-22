@@ -79,6 +79,6 @@ order by substr(r_reason_desc,1,20)
         ,avg(ws_quantity)
         ,avg(wr_refunded_cash)
         ,avg(wr_fee)
- limit 100;
+limit 100;
 
 

@@ -12,6 +12,6 @@ select  i_item_id
  and ss_item_sk = i_item_sk
  group by i_item_id,i_item_desc,i_current_price
  order by i_item_id
-  limit 100;
+ limit 100;
 
 

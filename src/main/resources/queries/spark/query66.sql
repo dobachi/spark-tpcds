@@ -215,6 +215,6 @@ select
  	,ship_carriers
        ,year
  order by w_warehouse_name
-  limit 100;
+ limit 100;
 
 

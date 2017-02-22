@@ -40,6 +40,6 @@ from (select item_sk
 where web_cumulative > store_cumulative
 order by item_sk
         ,d_date
- limit 100;
+limit 100;
 
 

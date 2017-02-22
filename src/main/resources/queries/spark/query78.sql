@@ -53,6 +53,6 @@ order by
   other_chan_wholesale_cost,
   other_chan_sales_price,
   round(ss_qty/(coalesce(ws_qty+cs_qty,1)),2)
- limit 100;
+limit 100;
 
 

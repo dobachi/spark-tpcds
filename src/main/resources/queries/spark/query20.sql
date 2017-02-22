@@ -25,6 +25,6 @@ select  i_item_id
          ,i_item_id
          ,i_item_desc
          ,revenueratio
- limit 100;
+limit 100;
 
 

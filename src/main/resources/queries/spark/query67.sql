@@ -39,6 +39,6 @@ order by i_category
         ,s_store_id
         ,sumsales
         ,rk
- limit 100;
+limit 100;
 
 

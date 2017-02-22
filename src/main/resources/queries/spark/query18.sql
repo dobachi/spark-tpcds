@@ -29,6 +29,6 @@ select  i_item_id,
         ca_state, 
         ca_county,
 	i_item_id
-  limit 100;
+ limit 100;
 
 

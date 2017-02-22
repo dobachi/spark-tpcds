@@ -30,6 +30,6 @@ select  c_last_name
           ,ca_city
           ,bought_city
           ,ss_ticket_number
-   limit 100;
+  limit 100;
 
 

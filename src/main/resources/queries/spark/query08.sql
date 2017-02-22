@@ -103,6 +103,6 @@ select  s_store_name
   and (substr(s_zip,1,2) = substr(V1.ca_zip,1,2))
  group by s_store_name
  order by s_store_name
-  limit 100;
+ limit 100;
 
 

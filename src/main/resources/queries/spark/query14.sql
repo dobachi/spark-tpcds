@@ -99,7 +99,7 @@ with  cross_items as
  ) y
  group by rollup (channel, i_brand_id,i_class_id,i_category_id)
  order by channel,i_brand_id,i_class_id,i_category_id
-  limit 100;
+ limit 100;
 with  cross_items as
  (select i_item_sk ss_item_sk
  from item,
@@ -193,6 +193,6 @@ with  cross_items as
    and this_year.i_class_id = last_year.i_class_id
    and this_year.i_category_id = last_year.i_category_id
  order by this_year.channel, this_year.i_brand_id, this_year.i_class_id, this_year.i_category_id
-  limit 100;
+ limit 100;
 
 

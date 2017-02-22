@@ -17,6 +17,6 @@ select  dt.d_year
  order by       sum(ss_ext_sales_price) desc,dt.d_year
  		,item.i_category_id
  		,item.i_category
- limit 100 ;
+limit 100 ;
 
 

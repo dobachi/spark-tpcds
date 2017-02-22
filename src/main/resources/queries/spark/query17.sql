@@ -40,6 +40,6 @@ select  i_item_id
  order by i_item_id
          ,i_item_desc
          ,s_state
- limit 100;
+limit 100;
 
 

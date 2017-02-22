@@ -43,6 +43,6 @@ select
  ,i_item_desc
  ,s_store_id
  ,s_store_name
-  limit 100;
+ limit 100;
 
 

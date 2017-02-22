@@ -30,6 +30,6 @@ where asceding.rnk = descending.rnk
   and i1.i_item_sk=asceding.item_sk
   and i2.i_item_sk=descending.item_sk
 order by asceding.rnk
- limit 100;
+limit 100;
 
 

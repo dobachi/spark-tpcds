@@ -1,6 +1,5 @@
-
 select  c_customer_id as customer_id
-       , coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
+       , coalesce(c_last_name,''), coalesce(c_first_name,'') as customername
  from customer
      ,customer_address
      ,customer_demographics
@@ -16,6 +15,4 @@ select  c_customer_id as customer_id
    and hd_demo_sk = c_current_hdemo_sk
    and sr_cdemo_sk = cd_demo_sk
  order by c_customer_id
-  limit 100;
-
-
+ limit 100;
