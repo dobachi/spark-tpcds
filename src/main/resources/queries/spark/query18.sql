@@ -28,7 +28,7 @@ select  i_item_id,
  order by ca_country,
         ca_state, 
         ca_county,
-	i_item_id
+    i_item_id
  limit 100;
 
 

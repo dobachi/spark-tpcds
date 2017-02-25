@@ -1,6 +1,6 @@
 
 select i_brand_id brand_id, i_brand brand,t_hour,t_minute,
- 	sum(ext_price) ext_price
+     sum(ext_price) ext_price
  from item, (select ws_ext_sales_price as ext_price, 
                         ws_sold_date_sk as sold_date_sk,
                         ws_item_sk as sold_item_sk,
