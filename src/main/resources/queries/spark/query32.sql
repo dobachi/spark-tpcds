@@ -1,5 +1,5 @@
 
-select  sum(cs_ext_discount_amt)  as "excess discount amount" 
+select  sum(cs_ext_discount_amt)  as excess_discount_amount
 from 
    catalog_sales 
    ,item 
