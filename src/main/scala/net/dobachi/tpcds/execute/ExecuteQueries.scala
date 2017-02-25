@@ -29,9 +29,9 @@ object ExecuteQueries {
   val log = LogManager.getLogger(this.getClass)
 
   def main(args: Array[String]): Unit = {
-    val parser = ExecuteQueriesOptionParser()
+    val parser = OptionParser()
 
-    parser.parse(args, ExecuteQueriesConfig()) match {
+    parser.parse(args, Config()) match {
       case Some(config) =>
         implicit val spark = SparkSession.builder().enableHiveSupport().appName(config.appName).getOrCreate()
         println(config.benchmark)

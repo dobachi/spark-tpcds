@@ -3,9 +3,9 @@ package net.dobachi.tpcds.execute
 /**
   * Created by dobachi on 2017/02/19.
   */
-object ExecuteQueriesOptionParser {
+object OptionParser {
   def apply() = {
-    new scopt.OptionParser[ExecuteQueriesConfig]("tpcds") {
+    new scopt.OptionParser[Config]("tpcds") {
       arg[String]("benchmark").action((x, c) =>
         c.copy(benchmark = x)
       ).text("The type of benchmark. default: impala-tpcds-queries")
