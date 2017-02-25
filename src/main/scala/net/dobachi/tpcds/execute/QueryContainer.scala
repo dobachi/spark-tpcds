@@ -27,7 +27,9 @@ class QueryContainer(benchmark: String, database: String)(implicit spark: SparkS
     }
 
     val walk = Files.walk(path, 1)
-    walk.sorted().toArray().tail.map(o => o.asInstanceOf[Path])
+    walk.sorted().toArray().tail.map{
+      case o: Path => o
+      case o => throw new RuntimeException(s"Found an invalid object: ${o.toString()}")}
   }
 
   val allQueries: Array[Query] = {
