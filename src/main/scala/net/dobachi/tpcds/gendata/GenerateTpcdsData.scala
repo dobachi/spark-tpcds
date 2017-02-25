@@ -40,10 +40,13 @@ object GenerateTpcdsData {
         val tpcdsData = new TpcdsData(config.partitionNum, config.toolDir, config.scaleFactor,
           config.outputDir, config.databaseName, config.enableOverwrite)
 
-        // If you want to create raw Parquet file instead of Hive table,
-        // you can use saveAsParquetFiles method instead of createTable method.
-        log.info("Creating tables")
-        tpcdsData.createTable()
+        if (config.writeAsTable) {
+          log.info("Creating tables")
+          tpcdsData.createTable()
+        } else {
+          log.info("Creating parquet files")
+          tpcdsData.saveAsParquetFiles()
+        }
 
       case None =>
         sys.exit(1)

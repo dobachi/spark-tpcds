@@ -9,4 +9,5 @@ case class Config(partitionNum: Int = 10,
                   outputDir: String = "/tmp/tpcds",
                   appName: String = "GenerateTpcdsData",
                   databaseName: String = "tpcds",
-                  enableOverwrite: Boolean = false)
+                  enableOverwrite: Boolean = false,
+                  writeAsTable: Boolean = false)

@@ -1,13 +1,11 @@
 package net.dobachi.tpcds.gendata
 
-import scopt.OptionParser
-
 /**
   * Created by dobachi on 2017/02/25.
   */
 object OptionParser {
-  def apply(): OptionParser[Config] = {
-    new OptionParser[Config]("GenerateTpcdsData") {
+  def apply(): scopt.OptionParser[Config] = {
+    new scopt.OptionParser[Config]("GenerateTpcdsData") {
       head("GenerateTpcdsData")
 
       arg[String]("outputDir").action((x, c) =>
@@ -31,6 +29,9 @@ object OptionParser {
 
       opt[Unit]("enableOverwrite").action((_, c) =>
         c.copy(enableOverwrite = true)).text("Enable overwrite mode")
+
+      opt[Unit]("writeAsTable").action((_, c) =>
+        c.copy(writeAsTable = true)).text("Write data as table data. When you write data to tables, 'outputDir' argument is ignored.")
     }
 
   }
