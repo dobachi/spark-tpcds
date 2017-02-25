@@ -1,4 +1,4 @@
-package net.dobachi
+package net.dobachi.tpcds.gendata
 
 import org.apache.spark.sql.types.{StructField, StructType}
 

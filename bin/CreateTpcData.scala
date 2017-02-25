@@ -1,4 +1,4 @@
-import net.dobachi.TpcdsData
+import net.dobachi.tpcds.gendata.TpcdsData
 
 /**
   * Scala Shell to create tables of TPC-DS data.

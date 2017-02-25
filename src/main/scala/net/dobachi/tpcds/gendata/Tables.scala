@@ -1,8 +1,6 @@
-package net.dobachi
+package net.dobachi.tpcds.gendata
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types._
 
 /**
   * Created by dobachi on 2017/02/18.

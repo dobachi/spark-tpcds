@@ -16,7 +16,7 @@
  */
 
 
-package net.dobachi
+package net.dobachi.tpcds.execute
 
 import org.apache.log4j.LogManager
 import org.apache.spark.sql.SparkSession
