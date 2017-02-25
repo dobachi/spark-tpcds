@@ -3,9 +3,9 @@ package net.dobachi.tpcds.gendata
 import org.apache.spark.sql.SparkSession
 
 /**
-  * Created by dobachi on 2017/02/18.
+  * Table definition of demension data
   */
-class Tables(implicit spark: SparkSession) extends Serializable {
+class DimensionTables(implicit spark: SparkSession) extends Serializable {
   import spark.sqlContext.implicits._
 
   val definitions = Seq(

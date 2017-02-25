@@ -1,6 +1,7 @@
 package net.dobachi.tpcds.gendata
 
-import org.apache.spark.sql.{Row, SparkSession}
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
@@ -14,13 +15,13 @@ class TpcdsData(partitionNum: Int, toolDir: String, scaleFactor: Int, outputDir:
 extends Serializable {
 
   val maxIndex = partitionNum - 1
-  val baseRdd = spark.sparkContext.parallelize(0 to maxIndex, partitionNum)
+  val factsBaseRdd = spark.sparkContext.parallelize(0 to maxIndex, partitionNum)
+  val dimensionBaseeRdd = spark.sparkContext.parallelize(Array(0), 1)
   val dsdgenBin = s"$toolDir/dsdgen"
+  val writeMode = if (enableOverwrite) "overwrite" else "error"
 
-  val tables = new Tables()
-
-  val dsdgenRdds = tables.definitions.map { table =>
-    val dsdgenRdd = baseRdd.flatMap{ i =>
+  private def executeDsdgen(baseRDD: RDD[Int], table: Table) = {
+    val dsdgenRdd = baseRDD.flatMap{ i =>
       if (! new java.io.File(dsdgenBin).exists) {
         sys.error(s"Could not find dsdgen at $dsdgenBin. Run install")
       }
@@ -44,7 +45,18 @@ extends Serializable {
     (table, splittedRdd)
   }
 
-  val dsdgenDFs = dsdgenRdds.map { case (table, rdd) =>
+  val factsTables = new FactsTables()
+  val dimensionTables = new DimensionTables()
+
+  val factsRdds = factsTables.definitions.map { table =>
+    executeDsdgen(factsBaseRdd, table)
+  }
+
+  val dimensionRdds = dimensionTables.definitions.map { table =>
+    executeDsdgen(dimensionBaseeRdd, table)
+  }
+
+  private def genDFs(table: Table, rdd: RDD[Row]) = {
     val stringDF = spark.sqlContext.createDataFrame(rdd, StructType(table.schema.fields.map(f => StructField(f.name, StringType))))
     val columns = table.schema.fields.map { f =>
       col(f.name).cast(f.dataType).as(f.name)
@@ -53,31 +65,37 @@ extends Serializable {
     (table, withSchemaDF)
   }
 
-  def saveAsParquetFiles() = {
-    if (enableOverwrite) {
-      dsdgenDFs.foreach { case (table, df) =>
+  val factsDFs = factsRdds.map { case (table, rdd) =>
+    genDFs(table, rdd)
+  }
+
+  val dimensionDFs = dimensionRdds.map { case (table, rdd) =>
+    genDFs(table, rdd)
+  }
+
+  private def saveDFsToParquetFiles(dfs: Seq[(Table, DataFrame)]) = {
+    dfs.foreach { case (table, df) =>
         val outputURL = outputDir + "/" + table.name
-        df.write.mode("overwrite").format("parquet").save(outputURL)
-      }
-    } else {
-      dsdgenDFs.foreach { case (table, df) =>
-        val outputURL = outputDir + "/" + table.name
-        df.write.format("parquet").save(outputURL)
-      }
+        df.write.mode(writeMode).format("parquet").save(outputURL)
     }
+  }
+
+  private def saveDFsToTables(dfs: Seq[(Table, DataFrame)]) = {
+    dfs.foreach { case (table, df) =>
+      df.write.format("parquet").mode(writeMode).saveAsTable(table.name)
+    }
+  }
+
+  def saveAsParquetFiles() = {
+    saveDFsToParquetFiles(factsDFs)
+    saveDFsToParquetFiles(dimensionDFs)
   }
 
   def createTable() = {
     spark.sqlContext.sql(s"CREATE DATABASE IF NOT EXISTS $databaseName")
     spark.sqlContext.sql(s"USE $databaseName")
-    if (enableOverwrite) {
-      dsdgenDFs.foreach { case (table, df) =>
-        df.write.format("parquet").mode("overwrite").saveAsTable(table.name)
-      }
-    } else {
-      dsdgenDFs.foreach { case (table, df) =>
-        df.write.format("parquet").saveAsTable(table.name)
-      }
-    }
+
+    saveDFsToTables(factsDFs)
+    saveDFsToTables(dimensionDFs)
   }
 }
