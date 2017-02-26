@@ -57,6 +57,15 @@ please run the application without --writeAsTable option.
 In this case, data is generated into the output directory which you specified
 as an command-line argument.
 
+## Difference from original queries of TPC-DS
+
+Queries in this projects for Spark is modified version of TPC-DS queries for netezza dialect.
+The main modifications are
+
+* Use concat instead of ||
+* Remove spaces from "as" expressions
+* Add "()" to the back and forth of "union all"
+
 ## ToDo
 
 - Fix queries for Spark
