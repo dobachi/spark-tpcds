@@ -23,7 +23,7 @@ import org.apache.spark.sql.SparkSession
 
 
 /**
-  * An exmaple of Spark application
+  * Execute queries
   */
 object ExecuteQueries {
   val log = LogManager.getLogger(this.getClass)

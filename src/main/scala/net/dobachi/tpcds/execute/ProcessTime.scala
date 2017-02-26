@@ -18,6 +18,6 @@
 package net.dobachi.tpcds.execute
 
 /**
-  * Created by dobachi on 2017/02/20.
+  * Helper class to calculate execution time.
   */
 case class ProcessTime(query: Query, pTime: Long)

@@ -20,7 +20,8 @@ package net.dobachi.tpcds.gendata
 import org.apache.spark.sql.types.{StructField, StructType}
 
 /**
-  * Created by dobachi on 2017/02/18.
+  * Representation of the table.
+  * This holds schema definition of the table.
   */
 case class Table(name: String, partitionColumns: Seq[String], fields: StructField*) {
   val schema = StructType(fields)

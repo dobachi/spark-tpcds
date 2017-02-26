@@ -18,7 +18,7 @@
 package net.dobachi.tpcds.execute
 
 /**
-  * Created by dobachi on 2017/02/11.
+  * Configuration used in scopt
   */
 case class Config(benchmark: String = "tpcds",
                   queryFilter: String = "",

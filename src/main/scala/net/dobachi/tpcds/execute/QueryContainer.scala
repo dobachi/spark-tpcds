@@ -25,7 +25,12 @@ import org.apache.spark.sql.SparkSession
 import scala.collection.JavaConverters._
 
 /**
-  * Created by dobachi on 2017/02/19.
+  * The container of queries.
+  * This container provides several functions.
+  *
+  * - The list of paths of queries
+  * - Filtering queries by the list of paths
+  * - Executing queries which are specified by the list of paths
   */
 class QueryContainer(benchmark: String, database: String)(implicit spark: SparkSession) extends Serializable {
   val log = LogManager.getLogger(this.getClass)

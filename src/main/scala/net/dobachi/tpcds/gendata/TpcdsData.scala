@@ -25,7 +25,7 @@ import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import scala.sys.process._
 
 /**
-  * Created by dobachi on 2017/02/18.
+  * Representation of tables
   */
 class TpcdsData(partitionNum: Int, toolDir: String, scaleFactor: Int, outputDir: String, databaseName: String,
                 enableOverwrite: Boolean = false)(implicit spark: SparkSession)

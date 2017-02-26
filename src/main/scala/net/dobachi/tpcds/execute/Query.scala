@@ -25,7 +25,11 @@ import org.apache.spark.sql.SparkSession
 import scala.io.Source
 
 /**
-  * Created by dobachi on 2017/02/19.
+  * Representation of each query.
+  * This class has the following functions.
+  *
+  * - Execute query
+  * - Calculate the execution time
   */
 class Query(val path: Path)(implicit spark: SparkSession) extends Serializable {
   val contents: Array[String] = {

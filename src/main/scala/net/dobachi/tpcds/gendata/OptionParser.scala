@@ -18,7 +18,7 @@
 package net.dobachi.tpcds.gendata
 
 /**
-  * Created by dobachi on 2017/02/25.
+  * Option parser.
   */
 object OptionParser {
   def apply(): scopt.OptionParser[Config] = {
