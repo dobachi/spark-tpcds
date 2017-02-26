@@ -45,14 +45,14 @@ select
      ,sum(nov_net) as nov_net
      ,sum(dec_net) as dec_net
  from (
-     select 
+     (select
      w_warehouse_name
      ,w_warehouse_sq_ft
      ,w_city
      ,w_county
      ,w_state
      ,w_country
-     ,'DIAMOND' || ',' || 'AIRBORNE' as ship_carriers
+     ,concat('DIAMOND', ',', 'AIRBORNE') as ship_carriers
        ,d_year as year
      ,sum(case when d_moy = 1 
          then ws_sales_price* ws_quantity else 0 end) as jan_sales
@@ -123,16 +123,16 @@ select
      ,w_county
      ,w_state
      ,w_country
-       ,d_year
+       ,d_year)
  union all
-     select 
+     (select
      w_warehouse_name
      ,w_warehouse_sq_ft
      ,w_city
      ,w_county
      ,w_state
      ,w_country
-     ,'DIAMOND' || ',' || 'AIRBORNE' as ship_carriers
+     ,concat('DIAMOND', ',', 'AIRBORNE') as ship_carriers
        ,d_year as year
      ,sum(case when d_moy = 1 
          then cs_ext_sales_price* cs_quantity else 0 end) as jan_sales
@@ -187,7 +187,7 @@ select
          ,warehouse
          ,date_dim
          ,time_dim
-      ,ship_mode
+      ,ship_mode)
      where
             cs_warehouse_sk =  w_warehouse_sk
         and cs_sold_date_sk = d_date_sk
