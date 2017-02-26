@@ -68,21 +68,21 @@ group by web_site_id)
         , sum(profit) as profit
  from 
  (select 'store channel' as channel
-        , 'store' || store_id as id
+        , concat('store', store_id) as id
         , sales
         , returns
         , profit
  from   ssr
  union all
  select 'catalog channel' as channel
-        , 'catalog_page' || catalog_page_id as id
+        , concat('catalog_page', catalog_page_id) as id
         , sales
         , returns
         , profit
  from  csr
  union all
  select 'web channel' as channel
-        , 'web_site' || web_site_id as id
+        , concat('web_site', web_site_id) as id
         , sales
         , returns
         , profit
