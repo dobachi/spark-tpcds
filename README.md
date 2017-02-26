@@ -8,7 +8,8 @@ This project is highly derived from the following projects.
 ## Highlights
 
 - Support TPC-DS v2.3.0
-- Generator of data TPC-DS
+- Tool for the input data
+- Tool for executing queries, which are included in src/main/resources/queries
 
 ## Libraries included
 
