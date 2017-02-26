@@ -1,13 +1,12 @@
-
-select   
-         w_warehouse_name
+select
+     w_warehouse_name
      ,w_warehouse_sq_ft
      ,w_city
      ,w_county
      ,w_state
      ,w_country
-        ,ship_carriers
-        ,year
+     ,ship_carriers
+     ,year
      ,sum(jan_sales) as jan_sales
      ,sum(feb_sales) as feb_sales
      ,sum(mar_sales) as mar_sales
@@ -187,7 +186,7 @@ select
          ,warehouse
          ,date_dim
          ,time_dim
-      ,ship_mode)
+      ,ship_mode
      where
             cs_warehouse_sk =  w_warehouse_sk
         and cs_sold_date_sk = d_date_sk
@@ -203,7 +202,7 @@ select
      ,w_county
      ,w_state
      ,w_country
-       ,d_year
+       ,d_year)
  ) x
  group by 
         w_warehouse_name
@@ -213,7 +212,7 @@ select
      ,w_state
      ,w_country
      ,ship_carriers
-       ,year
+     ,year
  order by w_warehouse_name
  limit 100;
 
