@@ -97,7 +97,7 @@ The main modifications are
 
 ## ToDo
 
-- Fix queries for Spark
+- Add other kinds of benchmarks
 
 ## Author
 - dobachi (dobachi1983oss@gmail.com)
