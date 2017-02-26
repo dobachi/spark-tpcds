@@ -57,6 +57,33 @@ please run the application without --writeAsTable option.
 In this case, data is generated into the output directory which you specified
 as an command-line argument.
 
+## Execute queries
+
+After preparing data, you can execute TPC-DS queries by the following command.
+
+```
+$ spark-submit --class net.dobachi.tpcds.execute.ExecuteQueries target/scala-2.11/spark-tpcds-assembly-0.1.0-SNAPSHOT.jar spark 
+```
+
+This project holds multiple types of queries in src/main/resources/queries directory
+and you can specify queries to be executed by the command line argument.
+In the above case, we use queries in "src/main/resources/queries/spark",
+which are a little different version of TPC-DS official queries for netezza dialect.
+
+This application holds the execution time of each query,
+and display them after executing all queries.
+
+e.g.
+
+```
+17/02/26 17:07:51 INFO execute.ExecuteQueries$: /queries/spark/query01.sql: 2388 msec
+17/02/26 17:07:51 INFO execute.ExecuteQueries$: /queries/spark/query02.sql: 791 msec
+17/02/26 17:07:51 INFO execute.ExecuteQueries$: /queries/spark/query03.sql: 460 msec
+17/02/26 17:07:51 INFO execute.ExecuteQueries$: /queries/spark/query04.sql: 708 msec
+17/02/26 17:07:51 INFO execute.ExecuteQueries$: /queries/spark/query05.sql: 1145 msec
+(snip)
+```
+
 ## Difference from original queries of TPC-DS
 
 Queries in this projects for Spark is modified version of TPC-DS queries for netezza dialect.
