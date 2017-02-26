@@ -29,7 +29,7 @@ Then, you can see target/scala-2.11/spark-tpcds-assembly-0.1.0-SNAPSHOT.jar.
 
 This application uses "dsdgen" tool of official data generator of TPC-DS,
 so that you should download sources of tools from 
-[tpcのダウンロードサイト](http://www.tpc.org/tpc_documents_current_versions/current_specifications.asp)
+[Official TPC Donwload site](http://www.tpc.org/tpc_documents_current_versions/current_specifications.asp)
 and compile them to create executable binaries.
 
 In this document, we assume that "dsdgen" tool is located in /usr/local/tpc-ds/default/tools directory.
