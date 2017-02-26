@@ -27,6 +27,8 @@ $ ./activator clean assembly
 
 Then, you can see target/scala-2.11/spark-tpcds-assembly-0.1.0-SNAPSHOT.jar.
 
+**Important**
+
 This application uses "dsdgen" tool of official data generator of TPC-DS,
 so that you should download sources of tools from 
 [Official TPC Donwload site](http://www.tpc.org/tpc_documents_current_versions/current_specifications.asp)
